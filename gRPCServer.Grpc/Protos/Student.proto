@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option csharp_namespace = "gRPCServer.gRPC.Protos";
+
+import "google/protobuf/empty.proto";
+
+service StudentService{
+	rpc Create(stream StudentCreateRequest) returns(stream StudentReplay);
+	rpc GetAll(google.protobuf.Empty) returns (stream StudentReplay);
+	rpc GetById(GetStudentByIdRequest) returns (StudentReplay);
+	rpc Update(StudentUpdateRequest) returns  (StuentSuccessReplay);
+	rpc Delete(GetStudentByIdRequest) returns  (StuentSuccessReplay);
+} 
+
+message StudentCreateRequest{	 
+     string FirstName =1;            
+     string LastName  = 2;                  
+     string StudentNumber= 3;
+     string FatherName   =4;         
+}
+
+message StudentReplay{
+	 int32 Id = 1;
+     string FirstName = 2;                   
+     string LastName  =3 ;                  
+     string StudentNumber=4;
+     string FatherName      =5; 
+}
+
+message GetStudentByIdRequest{
+    int32 Id=1;
+}
+
+message StudentUpdateRequest{
+     int32 Id =1;
+     string FirstName =2;                   
+     string LastName =3 ;                       
+     string FatherName =4; 
+}
+
+message StuentSuccessReplay{
+    bool Success=1;
+}
